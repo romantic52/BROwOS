@@ -14,9 +14,11 @@ BROwOS — самостоятельная браузерная операцио�
 [romantic52/BROwOS](https://github.com/romantic52/BROwOS). BROwOS не является
 продуктом Microsoft и не устанавливает Windows на устройство.
 
-**Текущая доставка:** реализация опубликована в commit [1f677c5](https://github.com/romantic52/BROwOS/commit/1f677c55388ede163e46dd7884cd0a10eaffbd7e) и открытом PR
-[#7](https://github.com/romantic52/BROwOS/pull/7). PR ещё не объединён; `main` пока содержит bootstrap. CI/deploy workflows
-подготовлены к загрузке; успешные GitHub Actions и live demo ещё не подтверждены.
+**Текущая доставка:** версия **0.1.0 preview** объединена в `main` через PR
+[#7](https://github.com/romantic52/BROwOS/pull/7); проверенный commit основной ветки — [afa791f](https://github.com/romantic52/BROwOS/commit/afa791f7b6ee335dcfed5363f7f46e090575525e).
+[CI #39100264368](https://github.com/romantic52/BROwOS/actions/runs/39100264368) успешно завершился на Node 22/24, включая серверный Chromium и frontend E2E;
+артефакты сборки и браузерных проверок доступны в run. GitHub Release/tag не
+создавались. GitHub Pages пока не опубликован: проверка целевого адреса вернула HTTP 404.
 
 **English:** BROwOS is a Windows 10-inspired browser desktop with persistent
 virtual files, multitasking and integrated applications. Local mode runs as a
@@ -32,9 +34,6 @@ on your own server. This preview does not include a Windows virtual machine.
 ```sh
 git clone https://github.com/romantic52/BROwOS.git
 cd BROwOS
-# До объединения PR #7: получить текущую реализацию для локальной проверки.
-git fetch origin pull/7/head
-git switch --detach FETCH_HEAD
 corepack enable
 corepack prepare pnpm@10.34.7 --activate
 pnpm install --frozen-lockfile
@@ -201,9 +200,13 @@ Chromium и запустите `pnpm test:e2e`; подробные команд�
 browser client, 4 интеграции файлов с приложениями и 64 серверных теста, включая
 3 проверки с настоящим Chromium. Отдельно **13/13 frontend E2E** прошли на свежей
 production-сборке за **18,3 секунды**, без ошибок и пропусков. Общий production
-build, ESLint и TypeScript check также прошли. GitHub Actions и публикация пока
-не подтверждены; точные границы проверок и доставки записаны в
-[DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
+build, ESLint и TypeScript check также прошли.
+
+В GitHub успешно завершился [CI #39100264368](https://github.com/romantic52/BROwOS/actions/runs/39100264368): quality checks на **Node 22 и 24**,
+**64 серверных теста** и **13 frontend E2E за 24,6 с**. Run содержит artifacts
+`web-dist-…` и `browser-evidence-…`. Повторный [CI main #39100459559](https://github.com/romantic52/BROwOS/actions/runs/39100459559) после merge также завершился **success**;
+для `afa791f` сохранены artifacts `web-dist-…` и `browser-evidence-…`. Публикация Pages отдельно не подтверждена; точные границы
+проверок и доставки записаны в [DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
 
 Сообщения коммитов используют Conventional Commits. Порядок работы,
 критерии проверки и правила сохранения данных — в
@@ -217,8 +220,17 @@ build, ESLint и TypeScript check также прошли. GitHub Actions и п�
 
 Workflow GitHub Pages публикует frontend из успешного CI/E2E для актуального
 `main`. **Целевой адрес:** `https://romantic52.github.io/BROwOS/`.
-Он считается работающим только после завершённого deployment и проверки загрузки;
-наличие этой строки не объявляет сайт опубликованным.
+Последняя HTTP-проверка вернула **404**. [Deploy Pages #39100560196](https://github.com/romantic52/BROwOS/actions/runs/39100560196) завершился **failed**
+на шаге `Read existing Pages configuration` (`configure-pages`):
+`Get Pages site failed`, `HttpError: Not Found`. Проверки кода в CI прошли;
+публикация заблокирована конфигурацией Pages.
+Следующий шаг — **Settings → Pages → Source → GitHub Actions**, затем повторить
+неудавшийся Deploy для того же актуального SHA `main`. Если `main` изменится,
+нужно дождаться CI новой версии и запустить публикацию её проверенного artifact.
+После deployment проверить загрузку приложения.
+В текущем сеансе GitHub connector не предоставил административные endpoints Pages,
+а доступ к настройкам через cloud browser остановился на timeout. Готовые workflows
+уже находятся в `main`; работа отслеживается в [Issue #5](https://github.com/romantic52/BROwOS/issues/5).
 
 ### Full Connected Edition
 
