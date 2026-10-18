@@ -102,6 +102,31 @@ GitHub Pages не запускает Node.js backend, серверный Chromiu
 Для такого случая разрешённый CORS origin — `https://romantic52.github.io`,
 без пути `/BROwOS/`.
 
+### Оформление официального репозитория
+
+Проверка GitHub API после первой поставки показала `description: null`, пустой
+список `topics` и `has_pages: false`. Подключённый инструмент позволяет доставлять
+исходники, PR и Issues, но не предоставляет операций изменения этих
+административных настроек. Облачный браузер не вернул страницу настроек;
+изменение About и включение Pages не объявляются выполненными.
+
+Для следующего доступа к настройкам сохранены точные значения владельца.
+В **About → Edit** официального `romantic52/BROwOS` задайте описание:
+
+> BROwOS — a browser-based Windows 10-inspired desktop operating environment with virtual filesystem, applications, multitasking and integrated web browsing.
+
+Topics:
+
+```text
+browos, webos, web-desktop, operating-system, windows-10, react,
+typescript, virtual-filesystem, browser-os, web-app, desktop-environment
+```
+
+Для публикации один раз выберите **Settings → Pages → Build and deployment →
+Source → GitHub Actions**. Затем повторите неудавшийся Deploy текущего `main`;
+если основная ветка уже изменилась, используйте успешный CI её новой версии.
+Описание и topics не влияют на сборку, но остаются незавершённой частью оформления.
+
 ## Connected разработка без Docker
 
 Полное руководство, API, лимиты и проверки находятся в [CONNECTED.md](CONNECTED.md).

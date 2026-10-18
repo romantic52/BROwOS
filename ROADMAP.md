@@ -1,34 +1,41 @@
 # BROwOS Roadmap
 
 Текущий этап — **0.1.0 preview**. Roadmap описывает реальные направления работ,
-а не гарантированные даты и не автоматически завершённые GitHub Issues.
+а не гарантированные даты. PR [#7](https://github.com/romantic52/BROwOS/pull/7) объединён, `main` содержит commit [afa791f](https://github.com/romantic52/BROwOS/commit/afa791f7b6ee335dcfed5363f7f46e090575525e).
+Отдельные GitHub Release/tag не создавались.
 Текущие доказательства вынесены в [DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
 
 ## Первый рабочий выпуск
 
-| Подсистема          | Реализованная основа                                                        | Условие закрытия этапа                                                           | Issue                                               |
-| ------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------- |
-| Оболочка и окна     | Пуск, taskbar, несколько окон, snap, два стола, настройки и восстановление  | Production frontend проходит пользовательские E2E, снимки сняты с него           | [#1](https://github.com/romantic52/BROwOS/issues/1) |
-| Файлы               | Транзакционная VFS, Explorer, import/export, Корзина и backup               | Поведенческие тесты ядра и сценарии Explorer проходят, данные переживают reload  | [#2](https://github.com/romantic52/BROwOS/issues/2) |
-| Приложения          | Блокнот, Calculator, Paint, Photos, Media, Terminal, Settings, Task Manager | Save/open и реальные действия проверены через UI; несохранённые данные защищены  | [#3](https://github.com/romantic52/BROwOS/issues/3) |
-| BROwser             | Local tabs/history/bookmarks, Connected API и Chromium                      | Client lifecycle и UI проверены; документированы ограничения и серверная приёмка | [#4](https://github.com/romantic52/BROwOS/issues/4) |
-| Качество и доставка | Workspace, CI/E2E/Pages workflows, Docker и документация                    | Актуальный main содержит проверенный код; GitHub CI и Pages подтверждены         | [#5](https://github.com/romantic52/BROwOS/issues/5) |
+| Подсистема          | Реализованная основа                                                        | Условие закрытия этапа                                                          | Issue                                                        |
+| ------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Оболочка и окна     | Пуск, taskbar, несколько окон, snap, два стола, настройки и восстановление  | Production frontend проходит пользовательские E2E, снимки сняты с него          | [#1](https://github.com/romantic52/BROwOS/issues/1) — CLOSED |
+| Файлы               | Транзакционная VFS, Explorer, import/export, Корзина и backup               | Поведенческие тесты ядра и сценарии Explorer проходят, данные переживают reload | [#2](https://github.com/romantic52/BROwOS/issues/2) — CLOSED |
+| Приложения          | Блокнот, Calculator, Paint, Photos, Media, Terminal, Settings, Task Manager | Save/open и реальные действия проверены через UI; несохранённые данные защищены | [#3](https://github.com/romantic52/BROwOS/issues/3) — CLOSED |
+| BROwser             | Local tabs/history/bookmarks, Connected API и Chromium                      | Остаётся production Connected acceptance на Docker-хосте с публичным HTTPS      | [#4](https://github.com/romantic52/BROwOS/issues/4) — OPEN   |
+| Качество и доставка | Workspace, CI/E2E/Pages workflows, Docker и документация                    | Код в main и PR CI подтверждены; остаются настройка и проверка Pages            | [#5](https://github.com/romantic52/BROwOS/issues/5) — OPEN   |
 
-Во время первого сеанса локальные проверки ядра и приложений уже выполнены.
-Прошли 13 frontend E2E на production-сборке, 29 browser-client tests и 64 серверных
-теста, включая три реальных Chromium-сценария. Настоящие снимки включены в README.
-Окончательный GitHub CI и публикация подтверждаются отдельными реальными прогонами.
+Полный локальный Vitest прошёл **210/210**, frontend E2E — **13/13 за 18,3 с**.
+[CI #39100264368](https://github.com/romantic52/BROwOS/actions/runs/39100264368) завершился **success** на Node 22/24 с **64 серверными тестами**,
+**13 frontend E2E за 24,6 с** и artifacts `web-dist-…`, `browser-evidence-…`.
+Повторный [CI main #39100459559](https://github.com/romantic52/BROwOS/actions/runs/39100459559) после merge также **success**; artifacts для `afa791f` сохранены.
+Настоящие снимки включены в README. Issues #1–#3 закрыты; дальнейшее расширение
+UI-проверок и возможностей оформляется отдельными задачами.
 
-## Следующий приоритет: надёжная приёмка
+## Следующий приоритет: публичная демонстрация и серверная приёмка
 
-1. Выполнить итоговый общий quality gate после объединения модулей; использовать
-   уже пройденные E2E как приёмочные сценарии и расширять их для конкретных ошибок.
-2. Объединить проверенный feature PR в `main`, дождаться успешного CI и проверить
-   реальную загрузку GitHub Pages.
-3. Сохранить HTML/JUnit/trace и screenshots как GitHub Actions artifacts, добавить
-   в документацию реальные commit, PR, run и deployment links.
-4. Выполнить `docker compose build` и Connected acceptance на отдельном хосте:
-   sandboxed startup, публичная HTTPS-страница, корректный кадр и отказ private URL.
+1. Выполнить **Settings → Pages → Source → GitHub Actions** в репозитории.
+   [Deploy Pages #39100560196](https://github.com/romantic52/BROwOS/actions/runs/39100560196) завершился **failed** на `configure-pages` с `HttpError: Not Found`;
+   целевой адрес возвращает **404**. После включения повторить Deploy актуального
+   SHA `main`; если `main` изменится, дождаться CI новой версии и публикации её
+   проверенного artifact, затем проверить загрузку приложения. Connector не предоставляет административные
+   endpoints Pages; cloud browser остановился на timeout. Issue #5 остаётся открытой.
+2. Выполнить `docker compose build` и Connected acceptance на отдельном хосте
+   с DNS и HTTPS: sandboxed startup, публичная страница, корректный кадр/ввод,
+   отказ private URL, лимиты и expiry. В текущей среде нет Docker daemon;
+   внешняя HTTPS-проверка не прошла системный DNS. Issue #4 остаётся открытой.
+3. После подтверждения добавить реальный deployment/live URL в документацию
+   и закрыть соответствующую задачу. Issue #6 остаётся открытой для будущей VM.
 
 ## Развитие после подтверждения preview
 

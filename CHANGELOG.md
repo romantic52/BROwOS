@@ -4,7 +4,10 @@
 Версия в манифестах — `0.1.0`; опубликованный GitHub Release и завершённое
 развёртывание не подразумеваются наличием этого файла.
 
-## Unreleased — 0.1.0 preview
+## 0.1.0 preview — поставлено в main
+
+PR [#7](https://github.com/romantic52/BROwOS/pull/7) объединён, основная ветка проверена на commit [afa791f](https://github.com/romantic52/BROwOS/commit/afa791f7b6ee335dcfed5363f7f46e090575525e).
+Это поставка исходников preview; отдельные GitHub Release и tag не создавались.
 
 ### Добавлено
 
@@ -46,17 +49,25 @@
 
 ### Проверка
 
-Выполнены локальные наборы ядра VFS, окон, настроек, общих функций, моделей
-приложений и их интеграции. Прошли 13 frontend E2E на production-сборке,
-29 browser-client tests и 64 серверные проверки, включая три реальных
-Chromium-сценария на контролируемых страницах. В README включены настоящие снимки
-рабочего стола и сохранённого документа. Результаты общего quality gate, Actions,
-merge и deployment обновляются в
-[docs/DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
+Полный локальный Vitest: **210/210 passed**, 13 файлов, без ошибок и пропусков;
+включены 29 browser-client tests, 4 файловые интеграции и 64 серверные проверки
+с тремя реальными Chromium-сценариями. Отдельно прошли **13/13 frontend E2E**
+на production-сборке за **18,3 с**. Общий build, ESLint и TypeScript прошли.
+
+[CI #39100264368](https://github.com/romantic52/BROwOS/actions/runs/39100264368) завершился **success**: Node 22/24 quality, **64 серверных теста** и
+**13 frontend E2E за 24,6 с**. Созданы artifacts `web-dist-…` и
+`browser-evidence-…`. Issues #1–#3 закрыты после доставки. В README включены
+настоящие снимки рабочего стола и сохранённого документа. Повторный [CI main #39100459559](https://github.com/romantic52/BROwOS/actions/runs/39100459559) после merge также **success**.
+Публикация Pages отслеживается в [docs/DEVELOPMENT_STATUS.md](docs/DEVELOPMENT_STATUS.md).
 
 ### Известные незавершённые области
 
-Проверка Docker/sandbox и публичного HTTPS на целевом хосте, более плавный
+GitHub Pages вернул HTTP 404; [Deploy Pages #39100560196](https://github.com/romantic52/BROwOS/actions/runs/39100560196) завершился **failed** на
+`configure-pages` с `HttpError: Not Found`. Следующий шаг — **Settings → Pages →
+Source → GitHub Actions**, затем повторить Deploy актуального SHA или после
+изменения `main` дождаться CI новой версии и публикации её artifact. Административные endpoints Pages в connector недоступны, а cloud
+browser завершился timeout. Также остаются проверка Docker/sandbox и публичного
+HTTPS на целевом хосте, более плавный
 Connected-транспорт, remote download/upload/audio, синхронизация, устойчивые
 черновики, изоляция сторонних приложений и Remote VM. Подробности — в
 [ROADMAP.md](ROADMAP.md).
