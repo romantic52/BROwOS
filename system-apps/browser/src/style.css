@@ -1,0 +1,560 @@
+.browser-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  color: var(--text);
+  position: relative;
+  font-size: 12px;
+}
+.browser-tabs {
+  height: 33px;
+  display: flex;
+  gap: 3px;
+  padding: 3px 5px 0;
+  background: var(--browser-chrome, #dee5ed);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.browser-tab {
+  display: flex;
+  background: var(--browser-tab, #d3dce6);
+  max-width: 208px;
+  min-width: 95px;
+  flex: 0 1 200px;
+  align-items: center;
+  border-radius: 5px 5px 0 0;
+}
+.browser-tab.selected {
+  background: var(--surface, #fff);
+}
+.browser-tab > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 7px 9px;
+  font-size: 11px;
+  min-width: 0;
+}
+.browser-tab > button:first-child {
+  flex: 1;
+}
+.browser-tab span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.browser-tab > button:last-child {
+  padding: 6px;
+}
+.new-tab {
+  border: 0;
+  background: none;
+  color: inherit;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  flex-shrink: 0;
+}
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 43px;
+  padding: 6px 9px;
+  flex-shrink: 0;
+}
+.browser-toolbar > button {
+  width: 28px;
+  height: 27px;
+  background: transparent;
+  border: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+}
+.browser-toolbar button:disabled {
+  opacity: 0.25;
+}
+.browser-toolbar > button:hover {
+  background: var(--hover);
+}
+.browser-toolbar form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  gap: 9px;
+  background: var(--surface-muted, #f0f3f6);
+  border: 1px solid var(--border, #e3e8ed);
+  padding: 0 10px;
+  height: 31px;
+  border-radius: 4px;
+  margin: 0 4px;
+  color: var(--text-secondary);
+}
+.browser-toolbar form:focus-within {
+  border-color: var(--accent);
+}
+.browser-toolbar form input {
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--text);
+  width: 100%;
+  min-width: 30px;
+  font-size: 12px;
+}
+.browser-toolbar form button {
+  background: none;
+  border: 0;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  color: inherit;
+}
+.browser-toolbar .bookmarked {
+  color: #d3a021;
+}
+.browser-bookmarks {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px 5px;
+  border-bottom: 1px solid var(--border);
+  min-height: 29px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.browser-bookmarks > button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  background: none;
+  border: 0;
+  color: var(--text-secondary);
+  padding: 3px 5px;
+  white-space: nowrap;
+}
+.browser-bookmarks > button:hover {
+  background: var(--hover);
+}
+.browser-bookmarks > span {
+  flex: 1;
+}
+.browser-bookmarks .browser-mode {
+  font-size: 10px;
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+.browser-mode.connected {
+  color: #218957;
+}
+.browser-home {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 35px 23px;
+  background: radial-gradient(ellipse at 50% -50%, #daefff, transparent 70%), var(--surface);
+}
+.browser-home-logo {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  color: var(--accent);
+}
+.browser-home-logo > span {
+  font-weight: 350;
+  font-size: 36px;
+  letter-spacing: -1.5px;
+}
+.browser-home h1 {
+  font-size: 24px;
+  font-weight: 350;
+  margin: 14px 0 23px;
+  color: var(--text);
+}
+.browser-home-search {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  padding: 11px 17px;
+  border: 1px solid var(--border, #d8e2ee);
+  border-radius: 5px;
+  box-shadow: 0 5px 16px #2d5b8010;
+  color: #7a95af;
+}
+.browser-home-search input {
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--text);
+  font-size: 13px;
+  flex: 1;
+  min-width: 60px;
+}
+.browser-home-search > button {
+  background: none;
+  border: 0;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+}
+.browser-shortcuts {
+  display: flex;
+  gap: 19px;
+  margin: 26px 0 25px;
+}
+.browser-shortcuts button {
+  width: 98px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 5px;
+  color: var(--text);
+  border-radius: 5px;
+}
+.browser-shortcuts button:hover {
+  background: var(--hover);
+}
+.browser-shortcuts span {
+  height: 48px;
+  width: 48px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+}
+.browser-shortcuts strong {
+  font-weight: 400;
+  font-size: 10px;
+}
+.browser-home-card {
+  max-width: 680px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  padding: 18px 20px;
+}
+.browser-home-card > svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.browser-home-card > div {
+  flex: 1;
+}
+.browser-home-card strong {
+  font-weight: 500;
+  font-size: 13px;
+}
+.browser-home-card p {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 5px 0 0;
+}
+.browser-home-card .app-button {
+  font-size: 11px;
+  padding: 7px 12px;
+  flex-shrink: 0;
+}
+.browser-home-note {
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 600px;
+  text-align: center;
+  margin: 14px 0 0;
+}
+.local-browser-frame {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.local-browser-frame iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  min-height: 0;
+  background: white;
+}
+.iframe-note {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 10px;
+  gap: 7px;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+.iframe-note > span {
+  flex: 1;
+}
+.iframe-note button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: 10px;
+}
+.browser-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff0ed;
+  color: #a6372c;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+.browser-error > span {
+  flex: 1;
+}
+.browser-error > button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+.browser-history {
+  position: absolute;
+  z-index: 50;
+  right: 10px;
+  top: 75px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 25px #0003;
+  width: min(360px, 90%);
+  max-height: 280px;
+  overflow: auto;
+  padding: 12px;
+}
+.browser-history h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 4px 0 10px;
+}
+.browser-history button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  background: none;
+  border: 0;
+  font-size: 11px;
+  padding: 8px 3px;
+  color: var(--text-secondary);
+  text-align: left;
+}
+.browser-history button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.browser-modal {
+  position: absolute;
+  inset: 0;
+  background: #11243b75;
+  backdrop-filter: blur(5px);
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+}
+.connection-dialog {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 20px 80px #0005;
+  width: min(520px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 24px 29px;
+}
+.connection-dialog header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--accent);
+}
+.connection-dialog header button {
+  border: 0;
+  background: none;
+  color: var(--text-secondary);
+}
+.connection-dialog h2 {
+  font-size: 24px;
+  font-weight: 350;
+  margin: 15px 0 10px;
+}
+.connection-dialog > p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 12px;
+  margin: 0 0 18px;
+}
+.connection-dialog > label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.connection-dialog > small {
+  display: block;
+  line-height: 1.6;
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 13px;
+}
+.connection-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 21px;
+}
+.connection-actions a {
+  font-size: 11px;
+  color: var(--accent);
+  flex: 1;
+  text-decoration: none;
+}
+.remote-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #152030;
+}
+.remote-surface {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  overflow: hidden;
+  cursor: default;
+}
+.remote-surface:focus {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.remote-surface img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+.remote-loading {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.remote-loading p {
+  font-size: 12px;
+}
+.remote-input-bar {
+  height: 32px;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 3px 9px;
+  gap: 8px;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.remote-input-bar > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.remote-input-bar button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 10px;
+  padding: 3px 6px;
+}
+.remote-input-bar form {
+  display: flex;
+  flex: 1;
+  gap: 5px;
+}
+.remote-input-bar input {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 10px;
+  flex: 1;
+  min-width: 30px;
+  outline: none;
+  padding: 4px 6px;
+}
+.remote-status {
+  position: absolute;
+  z-index: 5;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #172537ef;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .browser-home {
+    padding: 23px 16px;
+  }
+  .browser-home h1 {
+    font-size: 21px;
+  }
+  .browser-shortcuts {
+    gap: 4px;
+  }
+  .browser-shortcuts button {
+    width: 76px;
+  }
+  .browser-home-card {
+    padding: 12px;
+    gap: 10px;
+  }
+  .browser-home-card > svg {
+    display: none;
+  }
+  .browser-home-card p {
+    font-size: 10px;
+  }
+  .browser-home-logo > span {
+    font-size: 29px;
+  }
+  .browser-home-note {
+    font-size: 9px;
+  }
+  .remote-input-bar > span {
+    display: none;
+  }
+  .browser-tabs {
+    height: 32px;
+  }
+}

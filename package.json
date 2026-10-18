@@ -10,16 +10,36 @@
   },
   "scripts": {
     "dev": "pnpm --filter @browos/web dev",
+    "dev:server": "pnpm --filter @browos/server dev",
+    "build": "pnpm --filter @browos/web build && pnpm --filter @browos/server build",
     "build:web": "pnpm --filter @browos/web build",
     "preview": "pnpm --filter @browos/web preview",
-    "build": "pnpm --filter @browos/web build"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --exclude 'tests/integration/**'",
+    "test:unit": "vitest run --exclude 'tests/integration/**'",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:integration && pnpm build",
+    "audit:dependencies": "pnpm audit --audit-level high"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.62.1",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "6.1.2",
+    "eslint": "10.13.0",
+    "fake-indexeddb": "^6.2.4",
+    "globals": "^17.0.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "vite": "8.3.4"
+    "typescript-eslint": "8.71.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
   }
 }

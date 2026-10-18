@@ -1,0 +1,220 @@
+.browos-media {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: #182333;
+  background: #101622;
+}
+.browos-media-toolbar {
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.browos-media-title {
+  flex: 1;
+  min-width: 80px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0 8px;
+  font-size: 12px;
+}
+.browos-media-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+}
+.browos-media-toolbar select {
+  background: #fff;
+  color: #182333;
+  border: 1px solid #cbd4df;
+  padding: 4px;
+  font: inherit;
+}
+.browos-media-toolbar button[aria-pressed='true'] {
+  background: #dceefa;
+  color: #0078d4;
+}
+.browos-media-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  color: #c9d5e5;
+}
+.browos-media-stage > video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.browos-media-audio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+}
+.browos-media-audio h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 18px 0 2px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #edf3fc;
+}
+.browos-media-audio p {
+  margin: 6px 0 18px;
+  font-size: 12px;
+  color: #8094b0;
+}
+.browos-media-audio audio {
+  width: min(100%, 480px);
+  height: 42px;
+}
+.browos-media-record {
+  width: 126px;
+  height: 126px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: repeating-radial-gradient(circle, #172436 0px 2px, #0d1726 3px 4px);
+  box-shadow: 0 9px 28px #0005;
+  border: 1px solid #23374e;
+}
+.browos-media-record > div {
+  height: 54px;
+  width: 54px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0078d4;
+  color: white;
+}
+.browos-media-record span {
+  font-size: 24px;
+  line-height: 1;
+}
+.browos-media-record small {
+  font-size: 7px;
+  margin-top: 2px;
+}
+.browos-media-record.playing {
+  animation: browos-record-turn 6s linear infinite;
+}
+@keyframes browos-record-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .browos-media-record.playing {
+    animation: none;
+  }
+}
+.browos-media-empty {
+  text-align: center;
+  padding: 28px;
+  max-width: 370px;
+}
+.browos-media-empty-icon {
+  font-size: 35px;
+  color: #4ca9ee;
+  height: 76px;
+  width: 76px;
+  border: 1px solid #354963;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: auto;
+  padding-left: 4px;
+}
+.browos-media-empty h2 {
+  font-weight: 500;
+  color: #eef4fc;
+  font-size: 21px;
+}
+.browos-media-empty p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #8b9fbc;
+}
+.browos-media-empty .app-button,
+.browos-media-error .app-button {
+  background: #0078d4;
+  color: white;
+  border-color: #138bea;
+  padding: 8px 18px;
+  margin-top: 12px;
+}
+.browos-media-error {
+  padding: 28px;
+  text-align: center;
+  color: #ff9fa8;
+  font-size: 13px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+.browos-media-bottom {
+  flex-shrink: 0;
+  background: #172130;
+  border-top: 1px solid #29384e;
+  color: #9caec6;
+}
+.browos-media-navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+.browos-media-navigation .app-button {
+  background: #25364d;
+  border-color: #344863;
+  color: #dce7f7;
+}
+.browos-media-playlist-label {
+  margin-left: auto;
+}
+.browos-media-playlist {
+  max-height: 95px;
+  overflow: auto;
+  padding: 0 10px 8px;
+}
+.browos-media-playlist button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #aebdd3;
+  border: 0;
+  background: transparent;
+  padding: 5px 8px;
+  font:
+    12px 'Segoe UI',
+    sans-serif;
+  cursor: pointer;
+}
+.browos-media-playlist button span {
+  color: #657f9e;
+  font-variant-numeric: tabular-nums;
+}
+.browos-media-playlist button:hover {
+  background: #213149;
+}
+.browos-media-playlist button.selected {
+  color: #80c6fb;
+  background: #203b55;
+}

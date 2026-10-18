@@ -1,0 +1,107 @@
+.browos-terminal {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0c111b;
+  color: #d9e2f1;
+  font:
+    13px/1.65 Consolas,
+    'Cascadia Code',
+    monospace;
+}
+.browos-terminal-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border-bottom: 1px solid #243042;
+  color: #a1b1c9;
+  background: #151c28;
+  font:
+    11px 'Segoe UI',
+    sans-serif;
+}
+.browos-terminal-dot {
+  width: 6px;
+  height: 6px;
+  background: #67d5a0;
+  border-radius: 50%;
+}
+.browos-terminal-bar-note {
+  margin-left: auto;
+  color: #61738e;
+}
+.browos-terminal-bar button {
+  color: #b7c5d8;
+  border: 1px solid #334358;
+  background: #1a2637;
+  font: inherit;
+  cursor: pointer;
+  padding: 3px 8px;
+}
+.browos-terminal-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 15px 18px;
+  overflow: auto;
+  cursor: text;
+}
+.browos-terminal-entry {
+  margin-bottom: 10px;
+}
+.browos-terminal-entry pre {
+  margin: 2px 0;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #c5d0e2;
+  user-select: text;
+}
+.browos-terminal-entry pre.browos-terminal-error {
+  color: #ff909b;
+}
+.browos-terminal-command {
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.browos-terminal-command span,
+.browos-terminal-input-row label {
+  color: #71d7b5;
+}
+.browos-terminal-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.browos-terminal-input-row label {
+  white-space: nowrap;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browos-terminal-input-row input {
+  border: 0;
+  background: transparent;
+  color: #eff5ff;
+  outline: none;
+  font: inherit;
+  min-width: 40px;
+  flex: 1;
+  padding: 0;
+  caret-color: #a2f6d0;
+}
+.browos-terminal-working {
+  color: #6d86a5;
+  font-size: 11px;
+}
+.browos-terminal-footer {
+  padding: 4px 13px;
+  color: #667b97;
+  background: #111825;
+  border-top: 1px solid #1d293b;
+  font:
+    10px 'Segoe UI',
+    sans-serif;
+}

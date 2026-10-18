@@ -1,5 +1,9 @@
 packages:
   - apps/*
+  - packages/*
+  - system-apps/*
 
 onlyBuiltDependencies:
   - esbuild
+
+minimumReleaseAge: 1440
