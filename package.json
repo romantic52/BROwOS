@@ -1,0 +1,25 @@
+{
+  "name": "browos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.7",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=10 <11"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @browos/web dev",
+    "build:web": "pnpm --filter @browos/web build",
+    "preview": "pnpm --filter @browos/web preview",
+    "build": "pnpm --filter @browos/web build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "typescript": "^5.9.3",
+    "vite": "8.3.4"
+  }
+}
