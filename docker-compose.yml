@@ -1,0 +1,86 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+    ports:
+      - '127.0.0.1:8080:8080'
+    depends_on:
+      chromium:
+        condition: service_healthy
+    networks:
+      - frontend
+      - browser-isolated
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=32m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    pids_limit: 64
+    restart: unless-stopped
+
+  chromium:
+    build:
+      context: .
+      dockerfile: docker/server.Dockerfile
+      target: browser
+    init: true
+    environment:
+      NODE_ENV: production
+      BROWOS_HOST: 0.0.0.0
+      BROWOS_PORT: '3001'
+      BROWOS_ACCESS_TOKEN: ${BROWOS_ACCESS_TOKEN:?Generate a private BROWOS_ACCESS_TOKEN with at least 32 characters}
+      BROWOS_ALLOWED_ORIGINS: ${BROWOS_PUBLIC_ORIGIN:-http://localhost:8080}
+      BROWOS_EGRESS_PROXY_URL: http://egress:3128
+      BROWOS_EGRESS_PROXY_TOKEN: ${BROWOS_EGRESS_PROXY_TOKEN:?Generate a separate private BROWOS_EGRESS_PROXY_TOKEN}
+      BROWOS_MAX_SESSIONS: ${BROWOS_MAX_SESSIONS:-4}
+    depends_on:
+      - egress
+    networks:
+      - browser-isolated
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=512m,uid=1000,gid=1000
+      - /home/node:rw,nosuid,nodev,size=32m,uid=1000,gid=1000
+    shm_size: 512m
+    mem_limit: 2g
+    cpus: 2.0
+    pids_limit: 256
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:./docker/seccomp_profile.json
+    restart: unless-stopped
+
+  egress:
+    build:
+      context: .
+      dockerfile: docker/server.Dockerfile
+      target: proxy
+    init: true
+    environment:
+      BROWOS_PROXY_HOST: 0.0.0.0
+      BROWOS_PROXY_PORT: '3128'
+      BROWOS_EGRESS_PROXY_TOKEN: ${BROWOS_EGRESS_PROXY_TOKEN:?Generate a separate private BROWOS_EGRESS_PROXY_TOKEN}
+    networks:
+      - browser-isolated
+      - internet-egress
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 64
+    restart: unless-stopped
+
+networks:
+  frontend: {}
+  browser-isolated:
+    internal: true
+  internet-egress: {}

@@ -1,0 +1,93 @@
+name: Deploy Pages
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Prepare verified frontend
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+    outputs:
+      current: ${{ steps.revision.outputs.current }}
+    steps:
+      # This privileged workflow never checks out or executes repository source.
+      - name: Check that the tested revision is still main
+        id: revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BROWOS_TESTED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          BROWOS_CURRENT_SHA="$(gh api "repos/$GITHUB_REPOSITORY/branches/main" --jq '.commit.sha')"
+          if [ "$BROWOS_CURRENT_SHA" = "$BROWOS_TESTED_SHA" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "A newer main revision exists; this completed run will not replace it." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Read existing Pages configuration
+        if: steps.revision.outputs.current == 'true'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: false
+      - name: Download build that passed CI and E2E
+        if: steps.revision.outputs.current == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: web-dist-${{ github.event.workflow_run.head_sha }}
+          path: site
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Verify the static entry point exists
+        if: steps.revision.outputs.current == 'true'
+        run: test -s site/index.html
+      - name: Package Pages artifact
+        if: steps.revision.outputs.current == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    name: Publish verified frontend
+    needs: prepare
+    if: needs.prepare.outputs.current == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Refuse an obsolete revision before publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BROWOS_TESTED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          BROWOS_CURRENT_SHA="$(gh api "repos/$GITHUB_REPOSITORY/branches/main" --jq '.commit.sha')"
+          test "$BROWOS_CURRENT_SHA" = "$BROWOS_TESTED_SHA"
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

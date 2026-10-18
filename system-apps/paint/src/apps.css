@@ -1,0 +1,122 @@
+.browos-paint {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  color: #182333;
+  background: #f4f6f8;
+}
+.browos-paint-toolbar {
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.browos-paint-separator {
+  height: 20px;
+  width: 1px;
+  background: #d3dae3;
+  margin: 0 5px;
+}
+.browos-paint-ribbon {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: #f6f8fb;
+  border-bottom: 1px solid #d5dce5;
+}
+.browos-paint-tools {
+  display: flex;
+  gap: 3px;
+}
+.browos-paint-tools button {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: 1px solid #cbd4df;
+  font:
+    23px/1 'Segoe UI',
+    sans-serif;
+  cursor: pointer;
+  color: #26384c;
+}
+.browos-paint-tools button[aria-pressed='true'] {
+  border-color: #0078d4;
+  color: #0078d4;
+  background: #e4f2fc;
+}
+.browos-paint-width {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.browos-paint-width input {
+  width: 88px;
+  accent-color: #0078d4;
+}
+.browos-paint-width span {
+  width: 28px;
+}
+.browos-paint-palette {
+  display: grid;
+  grid-template-columns: repeat(7, 20px);
+  gap: 3px;
+}
+.browos-paint-palette > button {
+  padding: 0;
+  border: 1px solid #bac5d2;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.browos-paint-palette > button[aria-pressed='true'] {
+  outline: 2px solid #0078d4;
+  outline-offset: 1px;
+  z-index: 1;
+}
+.browos-paint-palette label {
+  grid-column: 7;
+  grid-row: 1 / span 2;
+  display: flex;
+}
+.browos-paint-palette input[type='color'] {
+  width: 22px;
+  height: 43px;
+  padding: 0;
+  border: 1px solid #bcc8d6;
+  cursor: pointer;
+}
+.browos-paint-stage {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px;
+  background: #dde3eb;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.browos-paint-stage canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  box-shadow: 0 2px 7px #172b4d30;
+  touch-action: none;
+  background: repeating-conic-gradient(#f2f2f2 0% 25%, #fff 0% 50%) 0 0 / 16px 16px;
+}
+.browos-paint-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.browos-paint-error {
+  padding: 8px 12px;
+  background: #fff0f1;
+  color: #b8223b;
+  font-size: 12px;
+}

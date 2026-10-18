@@ -10,6 +10,13 @@
   },
   "dependencies": {
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "@browos/filesystem": "workspace:*",
+    "@browos/window-manager": "workspace:*",
+    "@browos/kernel": "workspace:*",
+    "@browos/application-runtime": "workspace:*",
+    "@browos/sdk": "workspace:*",
+    "@browos/ui": "workspace:*",
+    "@browos/shared": "workspace:*"
   }
 }

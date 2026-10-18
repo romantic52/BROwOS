@@ -1,0 +1,453 @@
+.settings-app {
+  display: flex;
+  height: 100%;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 13px;
+}
+.settings-app > nav {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface-muted);
+  padding: 24px 0;
+  overflow: auto;
+  border-right: 1px solid var(--border);
+}
+.settings-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 20px 22px;
+}
+.settings-user > span {
+  border-radius: 50%;
+  width: 39px;
+  height: 39px;
+  background: #496888;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+.settings-user > div {
+  min-width: 0;
+}
+.settings-user strong {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.settings-user small {
+  font-size: 10px;
+  color: var(--text-secondary);
+  display: block;
+  margin-top: 4px;
+}
+.settings-app > nav h3 {
+  padding: 0 20px;
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 10px 0 13px;
+}
+.settings-app > nav > button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 20px;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  color: var(--text);
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+.settings-app > nav > button:hover {
+  background: var(--hover);
+}
+.settings-app > nav > button.selected {
+  background: var(--selection);
+}
+.settings-app > nav > button.selected:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: var(--accent);
+}
+.settings-app > main {
+  padding: 29px 34px 40px;
+  overflow: auto;
+  min-width: 0;
+  flex: 1;
+}
+.settings-app h1 {
+  font-size: 25px;
+  font-weight: 350;
+  margin: 0 0 8px;
+  letter-spacing: -0.4px;
+}
+.settings-intro {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+.settings-app h2 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 23px 0 13px;
+}
+.wallpaper-preview {
+  height: 142px;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #ace5ff;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #0001;
+}
+.wallpaper-preview > div > span {
+  font-size: 29px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+.wallpaper-preview small {
+  display: block;
+  font-size: 9px;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+.wallpaper-preview footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 14px;
+  background: #101c2cdf;
+}
+.wallpaper-options {
+  display: flex;
+  gap: 10px;
+}
+.wallpaper-option {
+  height: 63px;
+  flex: 1;
+  max-width: 114px;
+  min-width: 50px;
+  position: relative;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.wallpaper-option.selected {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.wallpaper-option span {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  font-size: 9px;
+  text-shadow: 0 1px 3px #000;
+}
+.accent-options {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.accent-options button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+.accent-options button.selected {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+.theme-options {
+  display: flex;
+  gap: 10px;
+}
+.theme-options > button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 12px;
+  padding: 9px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.theme-options > button.selected {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  margin: 21px 0;
+  cursor: pointer;
+}
+.settings-toggle > span {
+  flex: 1;
+}
+.settings-toggle strong {
+  font-weight: 400;
+  display: block;
+  font-size: 13px;
+}
+.settings-toggle small {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: block;
+  line-height: 1.7;
+  margin-top: 5px;
+}
+.settings-toggle > input {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  width: 42px;
+  height: 22px;
+}
+.settings-toggle > i {
+  width: 39px;
+  height: 20px;
+  border: 1px solid #8893a0;
+  border-radius: 12px;
+  position: relative;
+  flex-shrink: 0;
+}
+.settings-toggle > i:after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background: #727e8b;
+  border-radius: 50%;
+  transition: 0.15s;
+}
+.settings-toggle > input:checked + i {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.settings-toggle > input:checked + i:after {
+  background: white;
+  left: 23px;
+}
+.settings-toggle > input:focus-visible + i {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.storage-summary {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  color: var(--accent);
+}
+.storage-summary strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 350;
+  color: var(--text);
+}
+.storage-summary span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-top: 7px;
+}
+.storage-quota {
+  margin: 22px 0;
+}
+.storage-quota > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.storage-quota strong {
+  font-weight: 400;
+}
+.storage-quota progress {
+  width: 100%;
+  height: 6px;
+  accent-color: var(--accent);
+  display: block;
+  margin: 10px 0;
+}
+.storage-quota small {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+.settings-paragraph {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.settings-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.settings-actions .app-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.settings-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--border);
+  padding: 13px 16px;
+  background: var(--surface-muted);
+  margin-top: 24px;
+  color: var(--text-secondary);
+}
+.settings-info svg {
+  flex-shrink: 0;
+}
+.settings-info p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+}
+.settings-name {
+  max-width: 300px;
+  width: 100%;
+  margin: 0 0 8px;
+}
+.mode-card {
+  padding: 17px 20px;
+  border: 1px solid var(--border);
+  margin: 18px 0;
+}
+.mode-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 13px 0 9px;
+}
+.mode-card p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.mode-card a {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.mode-badge {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #2a8758;
+  background: #e4f3e9;
+  padding: 4px 7px;
+}
+.mode-badge.server {
+  color: #94702d;
+  background: #f4eedc;
+}
+.mode-badge.future {
+  color: #7d8590;
+  background: var(--surface-muted);
+}
+.settings-about-logo {
+  color: var(--accent);
+  text-align: center;
+  margin: 10px 0 28px;
+}
+.settings-about-logo h1 {
+  font-size: 36px;
+  letter-spacing: 2px;
+  margin: 10px 0 3px;
+}
+.settings-about-logo p {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+.about-details {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 14px;
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 21px 0;
+  margin-bottom: 23px;
+}
+.about-details dt {
+  color: var(--text-secondary);
+}
+.about-details dd {
+  margin: 0;
+}
+.settings-repo-link {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 22px;
+  font-size: 12px;
+}
+@media (max-width: 650px) {
+  .settings-app > nav {
+    width: 160px;
+  }
+  .settings-user {
+    padding: 0 13px 15px;
+  }
+  .settings-user > span {
+    width: 29px;
+    height: 29px;
+    font-size: 13px;
+  }
+  .settings-app > nav > button {
+    padding: 12px;
+    font-size: 10px;
+    gap: 8px;
+  }
+  .settings-app > main {
+    padding: 24px 19px;
+  }
+  .settings-app h1 {
+    font-size: 22px;
+  }
+  .settings-about-logo h1 {
+    font-size: 32px;
+  }
+  .about-details {
+    grid-template-columns: 100px 1fr;
+  }
+  .wallpaper-preview {
+    height: 115px;
+  }
+}

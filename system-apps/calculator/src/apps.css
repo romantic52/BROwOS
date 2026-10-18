@@ -1,0 +1,128 @@
+.browos-calculator {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: #f1f3f6;
+  color: #182333;
+  overflow: auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+.browos-calculator-heading {
+  font-size: 21px;
+  font-weight: 600;
+}
+.browos-calculator-heading span {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #667184;
+  margin-top: 3px;
+}
+.browos-calculator-label {
+  display: block;
+  font-size: 11px;
+  color: #667184;
+}
+.browos-calculator-display input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  font:
+    600 clamp(24px, 4vw, 38px)/1.6 'Segoe UI',
+    sans-serif;
+  color: inherit;
+  text-align: right;
+  outline-offset: 2px;
+}
+.browos-calculator-error {
+  color: #606b7c;
+  font-size: 11px;
+  min-height: 18px;
+  text-align: right;
+}
+.browos-calculator-display:has(input[aria-invalid='true']) .browos-calculator-error {
+  color: #be263b;
+}
+.browos-calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  flex: 1;
+  min-height: 270px;
+}
+.browos-calculator-keys button {
+  font:
+    400 20px 'Segoe UI',
+    sans-serif;
+  border: 1px solid #dfe4eb;
+  background: #e6eaf0;
+  color: #182333;
+  min-height: 38px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.browos-calculator-keys button.number {
+  font-weight: 600;
+  background: #fff;
+}
+.browos-calculator-keys button:hover {
+  background: #d5e5f3;
+}
+.browos-calculator-keys button:active {
+  background: #bfddf5;
+}
+.browos-calculator-keys button.equals {
+  background: #0078d4;
+  color: white;
+}
+.browos-calculator-keys button.equals:hover {
+  background: #0065b3;
+}
+.browos-calculator-keys button.zero {
+  grid-column: span 2;
+}
+.browos-calculator-history {
+  max-height: 124px;
+  overflow: auto;
+  flex: 0 0 auto;
+  border-top: 1px solid #d5dce5;
+  padding-top: 8px;
+}
+.browos-calculator-history-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #667184;
+  margin-bottom: 4px;
+}
+.browos-calculator-history-title button {
+  width: auto !important;
+  color: #0078d4;
+}
+.browos-calculator-history button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 5px 3px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+}
+.browos-calculator-history button:hover {
+  background: #e0e6ee;
+}
+.browos-calculator-history button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

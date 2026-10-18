@@ -1,0 +1,14 @@
+{
+  "name": "@browos/settings",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.tsx",
+  "dependencies": {
+    "react": "19.3.1",
+    "@browos/sdk": "workspace:*",
+    "@browos/ui": "workspace:*",
+    "@browos/shared": "workspace:*",
+    "@browos/kernel": "workspace:*"
+  }
+}

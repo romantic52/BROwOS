@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a reproducible problem in BROwOS.
+title: 'bug: '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe what you observed. Remove credentials and personal file contents from logs and screenshots.
+        Security reports should follow SECURITY.md rather than include exploitation details in a public issue.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: '0.1.0 / commit SHA / demo URL'
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Runtime
+      options:
+        - Local / GitHub Pages
+        - Connected / server Chromium
+        - Development environment
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser and operating system
+      placeholder: Browser version, OS version, desktop/mobile, storage restrictions if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Open...
+        2. Create...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and evidence
+      description: Attach the exact error, a screenshot of the running app or a CI run link. Do not upload personal data.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Suggested regression test
+      description: What observable behavior would demonstrate the fix?

@@ -1,0 +1,48 @@
+name: Feature or subsystem
+description: Define an implementable feature with acceptance criteria and dependencies.
+title: 'feat: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: Describe the user need and the resulting behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: technical
+    attributes:
+      label: Technical description
+      description: Affected packages, persisted state, API changes and runtime constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] A user can...
+        - [ ] Existing data survives...
+        - [ ] The production build...
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Link blocking issues, required infrastructure or write None.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test scenarios
+      description: Normal flow, failure cases and persistence or integration behavior to verify.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope boundaries
+      description: State intentional limitations and follow-up work.

@@ -1,0 +1,11 @@
+{
+  "name": "@browos/photos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.tsx",
+  "dependencies": {
+    "@browos/sdk": "workspace:*",
+    "react": "^19.0.0"
+  }
+}

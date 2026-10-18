@@ -1,0 +1,6 @@
+# Run Caddy on the Docker host. Replace this hostname with your real DNS name.
+# Set BROWOS_PUBLIC_ORIGIN=https://browos.example.com before starting Compose.
+browos.example.com {
+    reverse_proxy 127.0.0.1:8080
+    header Strict-Transport-Security "max-age=31536000"
+}
