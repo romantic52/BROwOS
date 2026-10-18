@@ -1,0 +1,70 @@
+name: E2E
+
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        description: Production frontend artifact from this CI run; empty rebuilds locally.
+        required: false
+        type: string
+        default: ''
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium:
+    name: Chromium / production frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out tested source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.34.7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download exact production build
+        if: inputs.artifact != ''
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifact }}
+          path: apps/web/dist
+      - name: Build standalone test target
+        if: inputs.artifact == ''
+        run: pnpm build:web
+        env:
+          VITE_BASE_PATH: ./
+      - name: Install Chromium system dependencies
+        run: pnpm exec playwright install-deps chromium
+      - name: Install Chromium with official same-version CDN fallback
+        working-directory: apps/server
+        run: node ../../docker/install-chromium.mjs
+      - name: Run server integration against real Chromium
+        run: pnpm exec vitest run tests/server
+        env:
+          BROWOS_TEST_CHROMIUM: '1'
+          BROWOS_TEST_DISABLE_SANDBOX: '1'
+      - name: Run browser acceptance tests
+        run: pnpm test:e2e
+      - name: Upload screenshots, traces and HTML report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: browser-evidence-${{ github.sha }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 14
