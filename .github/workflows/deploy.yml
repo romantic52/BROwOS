@@ -46,7 +46,7 @@ jobs:
           fi
       - name: Read existing Pages configuration
         if: steps.revision.outputs.current == 'true'
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         with:
           enablement: false
       - name: Download build that passed CI and E2E
